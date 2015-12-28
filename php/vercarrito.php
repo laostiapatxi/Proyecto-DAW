@@ -110,6 +110,7 @@ class Carrito
  
 		//refrescamos él contenido del carrito para que quedé actualizado
 		$this->update_carrito();
+                echo "<script language=Javascript> location.href=\"maincarro.php\"; </script>";
 	}
  
 	//método que retorna el precio total del carrito
@@ -199,7 +200,9 @@ class Carrito
 	{
 		unset($_SESSION["carrito"]);
 		$this->carrito = null;
+                echo "<script language=Javascript> location.href=\"maincarro.php\"; </script>";
 		return true;
+                
 	}
  
 	//actualizamos el contenido del carrito

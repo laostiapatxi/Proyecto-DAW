@@ -1,6 +1,13 @@
 <?php
-session_start(); 
+
+session_start();
+
+require_once ("vercarrito.php");
+
+$carrito = new Carrito();
+
 ?>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link href="../css/simple-sidebar.css" rel="stylesheet">
 <link href="../css/main.css" rel="stylesheet">
@@ -15,20 +22,32 @@ session_start();
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Inicio</a>
+      <a class="navbar-brand" href="../index.php">Inicio</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Area Cliente</a></li>
         <li><a href="tienda.php">Tienda</a></li>
-        
+        <li><a href="Registro.php">Registrarse</a></li>        
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" id="usuario" ><?php echo $_SESSION['nombre']; ?></a></li>
-
+        <?php
+        if(isset($_SESSION['nombre'])){
+        ?>   
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['nombre']; ?><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="Area_Cliente.php">Mis Datos</a></li>
+            <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
+          </ul>
+        </li>
+        <?php
+        }
+        ?>
+        <li><a href="maincarro.php"><img style="max-width: 35px;" src="../css/imagenes/carro.png"/><span class="items_carro"><?php $total=$carrito->articulos_total();echo $total; ?></span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -79,7 +98,7 @@ session_start();
                 <input type="text" id="precio" name="precio" hidden="hide">
                 <input type="text" id="cod" name="cod" hidden="hide">
                 <input type="text" id="imagen" name="imagen" hidden="hide">
-                <input type="submit" name="enviar" value="Comprar">
+                <input type="submit" name="enviar" class="btn btn-primary cb2" value="Comprar">
             </form>
         </div>
         <!-- /#page-content-wrapper -->

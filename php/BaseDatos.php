@@ -87,7 +87,7 @@ public function selecciona($sentencia=null,$parametros=null,$email=null){
         $_SESSION["nombre"]=$email;
     echo "<script language=Javascript> location.href=\"Area_Cliente.php\"; </script>";
     }else {echo "<script> alert (\"Email o contraseña erroneo\"); </script>";
-        echo "<script language=Javascript> location.href=\"../index.html\"; </script>";
+        echo "<script language=Javascript> location.href=\"../index.php\"; </script>";
     }
     $con->close();
     }
@@ -126,7 +126,7 @@ public function insertar($sentencia=null,$param=null,$tipo=null) {
     if($filas==1){
         if($tipo=="registro"){
        echo "<script> alert (\"Te has registrado correctamente\"); </script>"; 
-       echo "<script language=Javascript> location.href=\"../index.html\"; </script>";
+       echo "<script language=Javascript> location.href=\"../index.php\"; </script>";
        die();}
          if($tipo=="articulo"){
        echo "<script> alert (\"Articulo creado correctamente\"); </script>"; 
@@ -134,7 +134,7 @@ public function insertar($sentencia=null,$param=null,$tipo=null) {
        die(); }}else {
         if($tipo=="registro"){
        echo "<script>alert(\"Ese email ya se encuentra en uso\");</script>";       
-       echo "<script language=Javascript> location.href=\"../index.html\"; </script>";}
+       echo "<script language=Javascript> location.href=\"../index.php\"; </script>";}
         if($tipo=="articulo"){
        echo "<script>alert(\"El articulo no se ha podido crear\");</script>";
        echo "<script language=Javascript> location.href=\"Panel_Control.php\"; </script>";}}

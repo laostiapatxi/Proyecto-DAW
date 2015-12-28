@@ -1,11 +1,24 @@
 <?php
-session_start(); 
+
+session_start();
+
+require_once ("vercarrito.php");
+
+$carrito = new Carrito();
+
 ?>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link href="../css/simple-sidebar.css" rel="stylesheet">
 <link href="../css/main.css" rel="stylesheet">
 
-   <nav class="navbar navbar-default">
+
+
+
+<div id="wrap">
+
+	<div id="header">
+               <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -15,30 +28,44 @@ session_start();
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Inicio</a>
+      <a class="navbar-brand" href="../index.php">Inicio</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Area Cliente</a></li>
         <li><a href="tienda.php">Tienda</a></li>
-        
+        <li><a href="Registro.php">Registrarse</a></li>        
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" id="usuario" ><?php echo $_SESSION['nombre']; ?></a></li>
-
+        <?php
+        if(isset($_SESSION['nombre'])){
+        ?>   
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['nombre']; ?><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="Area_Cliente.php">Mis Datos</a></li>
+            <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
+          </ul>
+        </li>
+        <?php
+        }
+        ?>
+        <li><a href="maincarro.php"><img style="max-width: 35px;" src="../css/imagenes/carro.png"/><span class="items_carro"><?php $total=$carrito->articulos_total();echo $total; ?></span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+	</div>
 
-<div id="wrapper">
+	<div id="main">
+            <div id="wrapper">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+        <div id="sidebar-wrapper"style="position: absolute !important">
+            <ul class="sidebar-nav" >
                 <li class="sidebar-brand">
                     <a href="tienda.php">
                         Menú de Articulos
@@ -78,8 +105,18 @@ session_start();
         <!-- /#page-content-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
+	</div>
 
+</div>
+
+
+    <div id="footer">
+            <ul id="iconmenu">
+            <li id="panel1c"><a href="https://twitter.com/"></a></li>
+            <li id="panel2c"><a href="https://es-es.facebook.com/"></a></li>
+            <li id="panel3c"><a href="http://www.rss.nom.es/"></a></li>
+        </ul>
+    </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script src="../js/tienda.js"></script>

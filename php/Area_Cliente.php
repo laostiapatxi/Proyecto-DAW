@@ -11,10 +11,16 @@ session_start();
 //COMPRUEBA QUE EL USUARIO ESTA AUTENTIFICADO 
 if ($_SESSION["autentificado"] != "SI") { 
    	//si no existe, envio a la página de autentificacion 
-   	header("Location: ../index.html"); 
+   	header("Location: ../index.php"); 
    	//ademas salgo de este script 
    	exit(); 
 }	
+
+
+        require_once ("BaseDatos.php");
+        require_once("vercarrito.php");
+        $carrito=new Carrito();
+        $bd=new BaseDatos();
 ?>
 <html>
     <head>
@@ -30,9 +36,7 @@ if ($_SESSION["autentificado"] != "SI") {
         
         <?php
         // put your code here
-        require_once ("BaseDatos.php");
-        
-        $bd=new BaseDatos();
+
         ?> 
   
        <div class="modal fade" id="modal_borrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -74,40 +78,54 @@ if ($_SESSION["autentificado"] != "SI") {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">Inicio</a>
+      <a class="navbar-brand" href="../index.php">Inicio</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#" onclick="borron()" data-toggle="modal" data-target="#modal_borrar">Link</a></li>
+        <li><a href="tienda.php">Tienda</a></li>
+        <li><a href="Registro.php">Registrarse</a></li>        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+           <?php
+        if(isset($_SESSION['nombre'])){
+        ?>   
+        
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['nombre']; ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="Area_Cliente.php">Mis Datos</a></li>
+            <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
           </ul>
         </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" id="usuario" ><?php echo $_SESSION['nombre']; ?></a></li>
-
+        <?php
+        }
+        ?>
+        <li><a href="maincarro.php"><img style="max-width: 35px;" src="../css/imagenes/carro.png"/><span class="items_carro"><?php $total=$carrito->articulos_total();echo $total; ?></span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+        
+        
+        
+        
+        
+        <div class="contenedor_cliente">
+           <div class="row acceso">
+            <ul>
+            <li style="position: relative">
+            <a href="#" class="picto-datos" id="showTickets">
+            <strong class="dos-lineas">Bandeja de Entrada</strong>
+            <p>Atención al cliente</p>
+            </a>
+            </li>
+            </ul>
+
+            </div>  
+        </div>
+        
         
         <div id="encabezado">
             <h1>Bienvenido <?php echo $_SESSION['nombre']; ?></h1>
@@ -118,7 +136,7 @@ if ($_SESSION["autentificado"] != "SI") {
 
         </form>
 </div>
-        
+
          <div id="contenidodo">
 	
         <?php
