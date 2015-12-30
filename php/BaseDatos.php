@@ -205,7 +205,8 @@ public function modificar($sentencia,$param) {
     $resultado->execute($param);
     $filas=$resultado->rowCount();
     if($filas==1){
-    echo "<p>El usuario se ha modificado correctamente</p>";
+    echo "<script>alert(\"Datos modificados correctamente\");</script>";
+    echo "<script language=Javascript> location.href=\"Area_Cliente.php\"; </script>";
     }else {echo "Ha ocurrido un error.";}
     $con->close();
     

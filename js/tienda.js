@@ -5,6 +5,7 @@ function alerta(){
    console.log(productos); 
 }
 function articulos(){
+    $("#articulos").empty();
     for(i=0;i<productos.length;i++){
         $("#articulos").append("<div class='col-sm-6 col-md-4'id='blabla' ><div class='thumbnail' ><a href='producto.php?"+productos[i][4]+"' class='lolo' id="+productos[i][4]+"><img style='width:240px;height:300px' src='../css/imagenes/"+productos[i][3]+"' alt='...'></a><div class='caption'><h4>"+productos[i][0]+"</h4><p>"+productos[i][1]+"€</p></div></div></div>")
     }
@@ -74,7 +75,7 @@ function borrando(){
 function borrando2(){
 
     productos=[]; 
-        $("#articulos").empty();
+        
 
         $.ajax({
                /*en principio el type para api restful sería delete pero no lo recogeríamos en $_REQUEST, así que queda como POST*/
@@ -101,8 +102,9 @@ function borrando2(){
                 productos.push([dataJson[i].nombre,dataJson[i].precio,dataJson[i].descripcion,dataJson[i].genero,dataJson[i].tipo,dataJson[i].color,dataJson[i].talla,dataJson[i].descripcion_corta,dataJson[i].cod,dataJson[i].imagen]);
                 
             }
+            $("#articulos").empty();
             for(i=0;i<productos.length;i++){
-        $("#articulos").append("<div class='col-sm-6 col-md-4'id='blabla' ><div class='thumbnail' ><a href='producto.php?"+productos[i][8]+"' class='lolo' id="+productos[i][8]+"><img style='width:240px;height:300px' src='../css/imagenes/"+productos[i][9]+"' alt='...'></a><div class='caption'><h4>"+productos[i][0]+"</h4><p>"+productos[i][1]+"€</p></div></div></div>")
+        $("#articulos").append("<div class='col-sm-6 col-md-4'id='blabla' ><div class='thumbnail' ><a href='producto.php?"+productos[i][8]+"' class='lolo' id="+productos[i][8]+"><img style='width:240px;height:300px' src='../css/imagenes/"+productos[i][9]+"' alt='...'></a><div class='caption'><h4>"+productos[i][0]+"</h4><p>"+productos[i][1]+"€</p></div></div></div>");
     }
                },
                complete: {

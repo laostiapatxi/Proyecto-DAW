@@ -35,7 +35,7 @@ function borrando(){
                 productos.push(dataJson[i].nombre,dataJson[i].precio,dataJson[i].descripcion,dataJson[i].genero,dataJson[i].tipo,dataJson[i].color,dataJson[i].talla,dataJson[i].descripcion_corta,dataJson[i].cod,dataJson[i].imagen,dataJson[i].cantidad);
                 
             }
-            $("#articulos").append("<div class='media' style='background:white'><div class='media-left'><img class='media-object' src='../css/imagenes/"+productos[9]+"' alt='...'></div><div class='media-body'><h2 class='media-heading'>"+productos[0]+"</h2><h4>"+productos[2]+"</h4></div></div>");
+            $("#articulos").append("<div class='media' style='background:whitesmoke'><div class='media-left'><img class='media-object' src='../css/imagenes/"+productos[9]+"' alt='...'></div><div class='media-body'><h2 class='media-heading'>"+productos[0]+"</h2><h4>"+productos[2]+"</h4><form action='maincarro.php' method='post'><input type='text' id='nombre' name='nombre' hidden='hide'><input type='text' id='precio' name='precio' hidden='hide'><input type='text' id='cod' name='cod' hidden='hide'><input type='text' id='imagen' name='imagen' hidden='hide'><input type='text' id='cantidad' name='cantidad' hidden='hide'><input type='submit' name='enviar'style='margin-top:63%;' class='btn btn-primary cb2' value='Comprar'></form></div></div>");
             $('#nombre').val(productos[0]);
             $('#precio').val(productos[1]);
             $('#cod').val(productos[8]);

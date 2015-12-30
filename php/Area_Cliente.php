@@ -93,7 +93,7 @@ if ($_SESSION["autentificado"] != "SI") {
         ?>   
         
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['nombre']; ?><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" id='user' data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['nombre']; ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="Area_Cliente.php">Mis Datos</a></li>
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
@@ -111,31 +111,41 @@ if ($_SESSION["autentificado"] != "SI") {
         
         
         
-        
-        <div class="contenedor_cliente">
-           <div class="row acceso">
-            <ul>
-            <li style="position: relative">
-            <a href="#" class="picto-datos" id="showTickets">
-            <strong class="dos-lineas">Bandeja de Entrada</strong>
-            <p>Atención al cliente</p>
-            </a>
-            </li>
-            </ul>
+ <div class="table_carro">       
 
-            </div>  
-        </div>
-        
-        
-        <div id="encabezado">
-            <h1>Bienvenido <?php echo $_SESSION['nombre']; ?></h1>
-        <form  action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+     <div class="row" style="margin: auto !important;">
+    <div>
+        <h2 class="mycss">Mi Panel</h2>
+        <hr style="border-top: 1px solid orange;">
+    </div>
+<div id="aqui" class="span12 accesos">
+<ul id="iconos">
 
-            <br/><button type="submit"  name="Borrar" >Borrar</button>
-            <button type="submit"  name="modificar">Modificar</button>
+<li>
+<a href="#" class="picto-datos" id="showMyData">
+<strong>Mis datos</strong>
+<p>Actualice o modifique sus datos personales</p>
+</a>
+</li>
 
-        </form>
+<li>
+<a href="#" class="picto-pedidos" id="showMyData">
+<strong>Mis pedidos</strong>
+<p>Consulte su historial de pedidos</p>
+</a>
+</li>
+
+<li>
+<a href="#" class="picto-salir">
+<strong>Salir</strong>
+<p>Salir de la cuenta de cliente</p>
+</a>
+</li>
+</ul>
 </div>
+</div>
+</div>
+          
 
          <div id="contenidodo">
 	
@@ -145,7 +155,7 @@ if ($_SESSION["autentificado"] != "SI") {
 
             
         if(isset($_POST['Eliminar'])){ 
-           ?><h2>Usuario a borrar: </h2><?php
+          
            $a=$_POST['email'];
            $pass=$_POST['pass'];
            $val=[":email"=>"$a",":pass"=>"$pass"];
@@ -154,54 +164,30 @@ if ($_SESSION["autentificado"] != "SI") {
             }
             
         
-        
-      
-        
-        if(isset($_POST['modificar'])){
-            
-            $param1=$_SESSION['nombre'];
-           $val=[":email"=>"$param1"];
-           $r=$bd->buscaDato("select * from usuarios where email=:email", $val);
-           
-         ?> <h2>Usuario a modificar:</h2>
-            <form  action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-            <div>
-            <input type="text" name="email1" value="<?php echo $r['email'] ?>" readonly="yes">Email Original<br/>
-            <input type="text" name="email" value="<?php echo $r['email']?>">Email<br/>
-            <input type="text" name="pass" value="<?php echo $r['pass']?>">Pass<br/>
-            </div>
-            <button type="submit" name="cambia">Modificar datos</button>
-            </form>
-            
-            <?php
-
-        }
-        
-            
-        
+         
         if(isset($_POST['cambia'])){
-            ?><h2>Usuario a modificar:</h2><?php
+            
             $param1=$_POST['email'];
             $param2=$_POST['pass'];
+            $param4=$_POST['pass1'];
             $param3=$_POST['email1'];
-            $val=[":email"=>"$param1",":pass"=>"$param2",":email1"=>"$param3"];
-            $bd->modificar("update usuarios set email=:email,pass=:pass where email=:email1;",$val);
+            $val=[":email"=>"$param1",":pass"=>"$param2",":pass1"=>"$param4",":email1"=>"$param3"];
+            $bd->modificar("update usuarios set email=:email,pass=:pass1 where email=:email1 and pass=:pass;",$val);
         }
         
         
         ?>
 </div>
 
-        <script type="text/javascript">
-            function borron(){
-                alert("Esta a punto de borrar su cuenta");
-            }
-        </script>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.js"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        
+
+<script type="text/javascript" src="../js/area_cliente.js"></script>
               
     </body>
 
 </html>
+
+

@@ -61,10 +61,10 @@ $carrito = new Carrito();
 	</div>
 
 	<div id="main">
-            <div id="wrapper">
+            <div id="wrapper" style="float: none;">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper"style="position: absolute !important">
+        <div id="sidebar-wrapper">
             <ul class="sidebar-nav" >
                 <li class="sidebar-brand">
                     <a href="tienda.php">
@@ -98,7 +98,7 @@ $carrito = new Carrito();
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div class="container-fluid" id="articulos">
+            <div  id="articulos">
 
             </div>
         </div>
