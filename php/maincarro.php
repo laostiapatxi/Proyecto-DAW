@@ -37,7 +37,7 @@ session_start();
 
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" id="usuario" ><?php echo $_SESSION['nombre']; ?></a></li>
-        <li><a href="php/maincarro.php"><img style="max-width: 35px;" src="../css/imagenes/carro.png"/><span class="items_carro"><?php $tot=$carrito->articulos_total();echo $tot; ?></span></a></li>
+        <li><a href="maincarro.php"><img style="max-width: 35px;" src="../css/imagenes/carro.png"/><span class="items_carro"><?php $tot=$carrito->articulos_total();echo $tot; ?></span></a></li>
 
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -53,7 +53,7 @@ session_start();
             <h1 style="text-align: center; margin-top: 3%;">El carro está vacio</h1>
             <div class="container">
             <img style="margin: auto;margin-bottom: 3%;" src="../css/imagenes/empty.png">
-            <button onclick="boton();" id="comprame" style="margin-bottom: 3%;"  class="btn btn-primary">Empezar a Comprar</button>
+            <button onclick="boton();" style="margin-bottom: 3%;"  class="btn btn-primary">Empezar a Comprar</button>
             </div>
         </div> 
         <?php
@@ -73,6 +73,14 @@ session_start();
                 <th>Precio</th>
                                 <?php
                 foreach($carro as $producto){
+                    
+                    if($producto['disponible']==0){
+                        $carrito->remove_producto($producto['unique_id']);
+                    }
+                    
+                    if($producto['cantidad']==0){
+                        $carrito->remove_producto($producto['unique_id']);
+                    }
                     ?><tr>
                         <td hidden="hide"><?php echo $producto["unique_id"];?></td>
 
@@ -80,7 +88,17 @@ session_start();
                         
                         <td><?php echo $producto["nombre"];?></td>
 
-                        <td><?php  echo $producto["cantidad"];?></td>
+                        <td><form action="maincarro.php" method="post"><input type="submit"  name="restar" value="-"><?php  echo " ".$producto["cantidad"]." ";?>
+                                <?php
+                                if($producto['cantidad']<$producto['disponible']){
+                                ?>
+                                <button type="submit" name="añadir">+</button><?php } ?>
+                            <input type="text" name="cod" value="<?php echo $producto["cod"];?>" hidden="hide" >
+                            <input type="text" name="imagen" value="<?php echo $producto["imagen"];?>" hidden="hide" >
+                            <input type="text" name="nombre" value="<?php echo $producto["nombre"];?>" hidden="hide" >
+                            <input type="text" name="precio" value="<?php echo $producto["precio"];?>" hidden="hide" >
+                            <input type="text" name="disponible" value="<?php echo $producto["disponible"];?>" hidden="hide" >
+                            </form></td>
 
                         <td><?php  echo $producto["precio"]." €";?></td>
 
@@ -126,22 +144,39 @@ session_start();
 
 
 if(isset($_POST['comprame'])){
-    $carro = $carrito->get_content();
     
+    $carro = $carrito->get_content();
+    $id_pedido = rand(0, 1000);
     if($carro){ 
+        
         $array=[];
+        
         $array2=[];
+        
 	foreach($carro as $producto){
+            
            $cod= $producto['cod'];
+           
            $cantidad= $producto['cantidad'];
-           $array2=[$cod,$cantidad];
+           
+           $precio= $producto['precio'];
+           
+           $imagen= $producto['imagen'];
+           
+
+           
+           $array2=[$cod,$cantidad,$precio,$imagen,$id_pedido];
+           
            $dato=count($array);
+           
            $array[$dato]=$array2;
 	}
 
         
 }
-   $bd->comprobar_disponibilidad($array); 
+
+   $bd->comprobar_disponibilidad($array);
+   
 }
    
     
@@ -150,16 +185,63 @@ if(isset($_POST['comprame'])){
     $precio =$_POST["precio"];
     $cod = $_POST["cod"];
     $imagen = $_POST["imagen"];
+    $cantidad = $_POST["cantidad"];
+    
 
         $articulo = array(
 		"nombre"                =>		$nombre,
 		"precio"		=>		$precio,
                 "cod"                   =>		$cod,
                 "imagen"		=>		$imagen,
-                "cantidad"		=>		1
+                "cantidad"		=>		1,
+                "disponible"            =>		$cantidad,
 	);
  
         $carrito->add($articulo);
+        
+ 
+    
+    }
+    
+     if(isset($_POST['añadir'])){
+    $nombre = $_POST["nombre"];
+    $precio =$_POST["precio"];
+    $cod = $_POST["cod"];
+    $imagen = $_POST["imagen"];
+    $disponible = $_POST["disponible"];
+
+
+        $articulo = array(
+		"nombre"                =>		$nombre,
+		"precio"		=>		$precio,
+                "cod"                   =>		$cod,
+                "imagen"		=>		$imagen,
+                "cantidad"		=>		1,
+                "disponible"            =>		$disponible,
+	);
+ 
+        $carrito->add($articulo);
+        
+ 
+    
+    }
+         if(isset($_POST['restar'])){
+    $nombre = $_POST["nombre"];
+    $precio =$_POST["precio"];
+    $cod = $_POST["cod"];
+    $imagen = $_POST["imagen"];
+    $disponible = $_POST["disponible"];
+
+        $articulo = array(
+		"nombre"                =>		$nombre,
+		"precio"		=>		$precio,
+                "cod"                   =>		$cod,
+                "imagen"		=>		$imagen,
+                "cantidad"		=>		1,
+                "disponible"            =>		$disponible,
+	);
+ 
+        $carrito->remove($articulo);
         
  
     
@@ -187,9 +269,11 @@ if(isset($_POST['comprame'])){
 
 <script type="text/javascript">
     
+    
     function boton(){
         location.href="tienda.php";
     }
 
     
 </script>
+

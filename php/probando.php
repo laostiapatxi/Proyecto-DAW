@@ -23,7 +23,7 @@ mysql_query('SET names utf8');
  * Get data to display
  */
 
-   $query = "SELECT * from articulos"; 
+   $query = "SELECT * from articulos where cantidad>0"; 
 
 /* Consulta UPDATE */
 
@@ -40,6 +40,7 @@ while ($obj = mysql_fetch_object($resulset)) {
                    'descripcion_corta' => $obj->descripcion_corta,
                    'imagen' => $obj->imagen,
                    'cod' => $obj->cod,
+                   'cantidad' => $obj->cantidad,
         );
 }
 

@@ -1,7 +1,9 @@
 <?php
 
 session_start();
+
 include("mysql.php" );
+
 ?>
 <?php
 class BaseDatos {
@@ -26,31 +28,87 @@ public function __construct($dsn="mysql:host=localhost;dbname=alumno",$usr="root
 
 
 public function comprobar_disponibilidad($param) {
-    
+    $array=$param;
     $contador=0;
-    if (!$gaSql['link'] = mysql_pconnect($gaSql['server'], $gaSql['user'], $gaSql['password'])) {
-    fatal_error('Could not open connection to server');
-    }
-    if (!mysql_select_db($gaSql['db'], $gaSql['link'])) {
-        fatal_error('Could not select database ');
-    }
-    mysql_query('SET names utf8');
-    
-    for($i=0;$i<$param.lenght;$i++){
-        
-            $cod=$param[i][0];
+    if($this->con==null){
+    $con=  $this->conectar();}
+    $longitud=count($param);
+    for($i=0;$i<$longitud;$i++){
+
+            $cod=$param[$i][0];
+            
             $query = "select cantidad from articulos where cod=" . $cod;
-            $query_res = mysql_query($query);
-            if ($param[i][1] > $query_res) {
+            
+            foreach ($con->query($query) as $row) {
+                 if ($param[$i][1] > $row['cantidad']) {
                 echo "<script> alert (\"No hay suficientes prendas\"); </script>";
                 exit;
             } else {
                 $contador++;
             }
-        }
-    if($contador==$param.lenght){
-        
+            }
     }
+    
+    if($contador==$longitud){
+        
+       for($i=0;$i<$longitud;$i++){
+           
+            $cod=$param[$i][0];
+            $cantidad=$param[$i][1];
+            $query = "select cantidad from articulos where cod=" . $cod;
+            $con->query($query);
+            
+            foreach ($con->query($query) as $row) {
+                
+                 $cant= $row['cantidad'];
+
+                 $resul= $cant-$cantidad;
+
+                 $query2 = "update articulos set cantidad='$resul'where cod='$cod'";
+                 $con->query($query2);
+            }
+    }
+        if(isset($_SESSION['nombre'])){
+            
+        for($i=0;$i<$longitud;$i++){
+
+            $cod=$param[$i][0];
+            $cantidad=$param[$i][1];
+            $precio=$param[$i][2];
+            $imagen=$param[$i][3];
+            $id_pedido=$param[$i][4];
+            $usuario=$_SESSION['nombre'];
+
+            $query3 = "insert into pedidos values('$cod','$cantidad','$precio','$imagen','$id_pedido','$usuario')";
+            $con->query($query3);
+
+        }
+        
+       
+    }else{
+        for($i=0;$i<$longitud;$i++){
+
+            $cod=$param[$i][0];
+            $cantidad=$param[$i][1];
+            $precio=$param[$i][2];
+            $imagen=$param[$i][3];
+            $id_pedido=$param[$i][4];
+
+
+            $query4 = "insert into pedidos values('$cod','$cantidad','$precio','$imagen','$id_pedido')";
+            $con->query($query4);
+
+        }
+    }
+        
+    echo "<script> alert (\"Compra realizada con exito\"); </script>";
+    unset($_SESSION["carrito"]);
+    echo "<script language=Javascript> location.href=\"../index.php\"; </script>";
+           
+}
+        
+        $con->close();
+        
 }
 
 

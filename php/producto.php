@@ -98,6 +98,7 @@ $carrito = new Carrito();
                 <input type="text" id="precio" name="precio" hidden="hide">
                 <input type="text" id="cod" name="cod" hidden="hide">
                 <input type="text" id="imagen" name="imagen" hidden="hide">
+                <input type="text" id="cantidad" name="cantidad" hidden="hide">
                 <input type="submit" name="enviar" class="btn btn-primary cb2" value="Comprar">
             </form>
         </div>

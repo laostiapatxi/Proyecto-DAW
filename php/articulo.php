@@ -28,7 +28,7 @@ if (isset($_REQUEST['tipo'])) {
     // param was set in the query string
 
     $tipo = $_REQUEST['tipo'];
-    $query = "select * from articulos where tipo='$tipo'";
+    $query = "select * from articulos where tipo='$tipo' and cantidad>0";
 }
 /*
  * SQL queries
@@ -50,6 +50,7 @@ while ($obj = mysql_fetch_object($resulset)) {
                    'descripcion_corta' => $obj->descripcion_corta,
                    'cod' => $obj->cod,
                    'imagen' => $obj->imagen,
+                   'cantidad' => $obj->cantidad,
                    
         );
 }

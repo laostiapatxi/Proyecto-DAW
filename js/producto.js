@@ -32,14 +32,15 @@ function borrando(){
                    var dataJson = eval(datos);
              
             for(var i in dataJson){
-                productos.push(dataJson[i].nombre,dataJson[i].precio,dataJson[i].descripcion,dataJson[i].genero,dataJson[i].tipo,dataJson[i].color,dataJson[i].talla,dataJson[i].descripcion_corta,dataJson[i].cod,dataJson[i].imagen);
+                productos.push(dataJson[i].nombre,dataJson[i].precio,dataJson[i].descripcion,dataJson[i].genero,dataJson[i].tipo,dataJson[i].color,dataJson[i].talla,dataJson[i].descripcion_corta,dataJson[i].cod,dataJson[i].imagen,dataJson[i].cantidad);
                 
             }
             $("#articulos").append("<div class='media' style='background:white'><div class='media-left'><img class='media-object' src='../css/imagenes/"+productos[9]+"' alt='...'></div><div class='media-body'><h2 class='media-heading'>"+productos[0]+"</h2><h4>"+productos[2]+"</h4></div></div>");
             $('#nombre').val(productos[0]);
             $('#precio').val(productos[1]);
             $('#cod').val(productos[8]);
-            $('#imagen').val(productos[9]);   
+            $('#imagen').val(productos[9]);
+            $('#cantidad').val(productos[10]); 
                
                },
                complete: {
