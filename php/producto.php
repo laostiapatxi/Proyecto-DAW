@@ -8,9 +8,46 @@ $carrito = new Carrito();
 
 ?>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link href="../css/simple-sidebar.css" rel="stylesheet">
 <link href="../css/main.css" rel="stylesheet">
+<link href="../css/tienda.css" rel="stylesheet">
+
+
+
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Indentificacion</h4>
+      </div>
+      <form id="validForm" class="form-horizontal" action="index.php" method="post"> 
+      <div class="modal-body">
+
+  
+
+  <!-- Email input--> 
+  <div class="form-group"> <label class="col-md-3 control-label" for="email">Tu email<span class="required"> *</span> </label> <div class="col-md-9"> <input id="email" name="email1" placeholder="Tu email" class="form-control" type="email"> </div> </div> 
+
+   <!-- Contraseña input--> 
+   <div class="form-group"> <label class="col-md-3 control-label" for="pass">Contraseña<span class="required"> *</span> </label> <div class="col-md-9"> <input id="pass" name="pass1" placeholder="Contraseña" class="form-control" type="password"> </div> </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary"  id="login_a" name="Buscar">Aceptar</button>
+        
+      </div>
+      </form>
+    </div>
+  </div>
+</div>     
+        
+
+
+
 
    <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -32,8 +69,8 @@ $carrito = new Carrito();
         <li><a href="Registro.php">Registrarse</a></li>        
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <?php
+       <ul class="nav navbar-nav navbar-right">
+         <?php
         if(isset($_SESSION['nombre'])){
         ?>   
         
@@ -44,6 +81,10 @@ $carrito = new Carrito();
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
           </ul>
         </li>
+        <?php
+        }else{
+        ?>
+        <li><a href="#" id="login" data-toggle="modal" data-target="#login">Iniciar sesión</a></li>
         <?php
         }
         ?>

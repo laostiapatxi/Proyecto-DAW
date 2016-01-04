@@ -6,11 +6,11 @@
 }
 html{
 	font-family: 'Roboto', sans-serif;
-	background-image: url(../css/imagenes/fondo1.jpg);
+	background-image: url(../css/imagenes/fondo3.jpg);
 }
 
 body{
-    background-image: url(../css/imagenes/fondo1.jpg);
+    background-image: url(../css/imagenes/fondo3.jpg);
 }
 
 #cabecera { 
@@ -61,8 +61,7 @@ background-color: transparent;
 }
 
 a{
-	color:white;
-
+	color: black;
 }
 #principal {
 		margin-top:1%;
@@ -258,20 +257,17 @@ margin: 0 auto;
 
 .container{
   width:40% !important;
-  text-align:center;
+
 }
  .well{
-  background-color: #D2FA51;
+  /* background-color: #D2FA51; */
   border-radius: 20px;
-  border-color: #D2FA51;
+  /* border-color: #D2FA51; */
   color: black;
-
-
  }
 
  .btn {
-  background-color: #00927E;
-
+  /* background-color: #00927E; */
 }
 
 .hero-unit {
@@ -306,9 +302,8 @@ margin: 0 auto;
 
 
  .well{
-  background-color: #D1FBF5;
+  /* background-color: #D1FBF5; */
   border-radius: 20px;
-
  }
 
  
@@ -368,7 +363,7 @@ margin: 0 auto;
 }
 
 .items_carro{
-      background: red;
+      background: #ff6000;
    border-radius: 0.8em;
   -moz-border-radius: 0.8em;
   -webkit-border-radius: 0.8em;
@@ -428,6 +423,11 @@ html, body {height: 100%;}
 }
 
 
-.caption{
-    background-color: whitesmoke;
+.separador{
+    border:solid 1px #ff6000;
+    margin: 5px 0px 5px 0px;
+}
+
+tr{
+    border-bottom-color: #ff6000;
 }

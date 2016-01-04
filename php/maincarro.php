@@ -11,10 +11,40 @@ session_start();
 
 
   
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/main.css">
+
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Indentificacion</h4>
+      </div>
+      <form id="validForm" class="form-horizontal" action="index.php" method="post"> 
+      <div class="modal-body">
+
+  
+
+  <!-- Email input--> 
+  <div class="form-group"> <label class="col-md-3 control-label" for="email">Tu email<span class="required"> *</span> </label> <div class="col-md-9"> <input id="email" name="email1" placeholder="Tu email" class="form-control" type="email"> </div> </div> 
+
+   <!-- Contraseña input--> 
+   <div class="form-group"> <label class="col-md-3 control-label" for="pass">Contraseña<span class="required"> *</span> </label> <div class="col-md-9"> <input id="pass" name="pass1" placeholder="Contraseña" class="form-control" type="password"> </div> </div>
 
 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary"  id="login_a" name="Buscar">Aceptar</button>
+        
+      </div>
+      </form>
+    </div>
+  </div>
+</div>     
+        
+        
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -35,10 +65,26 @@ session_start();
         <li><a href="Registro.php">Registrarse</a></li>        
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" id="usuario" ><?php echo $_SESSION['nombre']; ?></a></li>
-        <li><a href="maincarro.php"><img style="max-width: 35px;" src="../css/imagenes/carro.png"/><span class="items_carro"><?php $tot=$carrito->articulos_total();echo $tot; ?></span></a></li>
-
+       <ul class="nav navbar-nav navbar-right">
+         <?php
+        if(isset($_SESSION['nombre'])){
+        ?>   
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['nombre']; ?><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="Area_Cliente.php">Mis Datos</a></li>
+            <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
+          </ul>
+        </li>
+        <?php
+        }else{
+        ?>
+        <li><a href="#" id="login" data-toggle="modal" data-target="#login">Iniciar sesión</a></li>
+        <?php
+        }
+        ?>
+        <li><a href="maincarro.php"><img style="max-width: 35px;" src="../css/imagenes/carro.png"/><span class="items_carro"><?php $total=$carrito->articulos_total();echo $total; ?></span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -145,6 +191,8 @@ session_start();
 
 if(isset($_POST['comprame'])){
     
+    $r=$carrito->precio_total();
+    
     $carro = $carrito->get_content();
     $id_pedido = rand(0, 1000);
     if($carro){ 
@@ -163,9 +211,13 @@ if(isset($_POST['comprame'])){
            
            $imagen= $producto['imagen'];
            
+           $nombre= $producto['nombre'];
+           
+           $total= $r;
+           
 
            
-           $array2=[$cod,$cantidad,$precio,$imagen,$id_pedido];
+           $array2=[$cod,$cantidad,$precio,$imagen,$id_pedido,$nombre,$total];
            
            $dato=count($array);
            
@@ -266,6 +318,11 @@ if(isset($_POST['comprame'])){
     
     
 ?>
+
+        
+        
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
     

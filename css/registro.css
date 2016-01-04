@@ -1,0 +1,12 @@
+html{
+	font-family: 'Roboto', sans-serif;
+	background-image: url(../css/imagenes/fondo2.jpg);
+}
+
+body{
+    background-image: url(../css/imagenes/fondo2.jpg);
+}
+
+legend{
+    border-bottom: 1px solid #ff6000;
+}

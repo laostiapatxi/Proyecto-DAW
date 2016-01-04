@@ -26,8 +26,8 @@ if ($_SESSION["autentificado"] != "SI") {
     <head>
         <title>Proyecto</title>
         <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../css/main.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -61,13 +61,16 @@ if ($_SESSION["autentificado"] != "SI") {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary"  id="borrar" name="Eliminar">Aceptar</button>
+        <button type="submit" class="btn btn-default"  id="borrar" name="Eliminar">Aceptar</button>
         
       </div>
       </form>
     </div>
   </div>
-</div>     
+</div>  
+        
+       <div id="wrap">       
+        
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -145,23 +148,23 @@ if ($_SESSION["autentificado"] != "SI") {
 </div>
 </div>
 </div>
-          
+</div>  
+        
+            <div id="footer">
+            <ul id="iconmenu">
+            <li id="panel1c"><a href="https://twitter.com/"></a></li>
+            <li id="panel2c"><a href="https://es-es.facebook.com/"></a></li>
+            <li id="panel3c"><a href="http://www.rss.nom.es/"></a></li>
+        </ul>
+    </div>
 
-         <div id="contenidodo">
+
 	
         <?php
            
         
 
-            
-        if(isset($_POST['Eliminar'])){ 
-          
-           $a=$_POST['email'];
-           $pass=$_POST['pass'];
-           $val=[":email"=>"$a",":pass"=>"$pass"];
-           $bd->borrar("delete from usuarios where email=:email and pass=:pass;",$val);
            
-            }
             
         
          
@@ -170,14 +173,13 @@ if ($_SESSION["autentificado"] != "SI") {
             $param1=$_POST['email'];
             $param2=$_POST['pass'];
             $param4=$_POST['pass1'];
-            $param3=$_POST['email1'];
-            $val=[":email"=>"$param1",":pass"=>"$param2",":pass1"=>"$param4",":email1"=>"$param3"];
-            $bd->modificar("update usuarios set email=:email,pass=:pass1 where email=:email1 and pass=:pass;",$val);
+            $val=[":email"=>"$param1",":pass"=>"$param2",":pass1"=>"$param4"];
+            $bd->modificar("update usuarios set pass=:pass1 where email=:email and pass=:pass;",$val);
         }
         
         
         ?>
-</div>
+
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>

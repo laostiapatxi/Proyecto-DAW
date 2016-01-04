@@ -77,9 +77,11 @@ public function comprobar_disponibilidad($param) {
             $precio=$param[$i][2];
             $imagen=$param[$i][3];
             $id_pedido=$param[$i][4];
+            $nombre=$param[$i][5];
+            $total=$param[$i][6];
             $usuario=$_SESSION['nombre'];
 
-            $query3 = "insert into pedidos values('$cod','$cantidad','$precio','$imagen','$id_pedido','$usuario')";
+            $query3 = "insert into pedidos values('$cod','$cantidad','$precio','$imagen','$id_pedido','$usuario','$nombre','$total')";
             $con->query($query3);
 
         }

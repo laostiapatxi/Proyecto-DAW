@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/var/www/html/Proyecto/css/main.css</file>
-            <file>file:/var/www/html/Proyecto/js/producto.js</file>
-            <file>file:/var/www/html/Proyecto/php/producto.php</file>
+            <file>file:/var/www/html/Proyecto/js/area_cliente.js</file>
+            <file>file:/var/www/html/Proyecto/php/pedidos_usuario.php</file>
+            <file>file:/var/www/html/Proyecto/php/probando.php</file>
+            <file>file:/var/www/html/Proyecto/php/Area_Cliente.php</file>
         </group>
     </open-files>
 </project-private>

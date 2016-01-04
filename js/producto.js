@@ -84,7 +84,7 @@ function borrando2(){
                 
             }
             for(i=0;i<productos.length;i++){
-        $("#articulos").append("<div class='col-sm-6 col-md-4'id='blabla' ><div class='thumbnail' ><a href='producto.php?"+productos[i][8]+"' class='lolo' id="+productos[i][8]+"><img style='width:240px;height:300px' src='../css/imagenes/"+productos[i][9]+"' alt='...'></a><div class='caption'><h4>"+productos[i][0]+"</h4><p>"+productos[i][1]+"€</p></div></div></div>")
+        $("#articulos").append("<div class='col-sm-6 col-md-4'id='blabla' ><div class='thumbnail' ><a href='producto.php?"+productos[i][8]+"' class='lolo' id="+productos[i][8]+"><img style='width:240px;height:300px' src='../css/imagenes/"+productos[i][9]+"' alt='...'></a><hr class='separador'><div class='caption'><h4>"+productos[i][0]+"</h4><p>"+productos[i][1]+"€</p></div></div></div>")
     }
                },
                complete: {
