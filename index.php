@@ -3,7 +3,7 @@
 
 session_start();
         // put your code here
-        require_once ("php/vercarrito.php");
+        require_once ("carro/vercarrito.php");
 
         $carrito = new Carrito();
         ?>
@@ -46,7 +46,7 @@ session_start();
  
         
         
- <div id="wrap">
+        <div id="wrap" style="margin-bottom: 5%;">
 
 	<div id="header">
                <nav class="navbar navbar-default">
@@ -65,8 +65,8 @@ session_start();
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="php/tienda.php">Tienda</a></li>
-        <li><a href="php/Registro.php">Registrarse</a></li>        
+        <li><a href="tienda/tienda.php">Tienda</a></li>
+        <li><a href="registro/Registro.php">Registrarse</a></li>        
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -77,7 +77,7 @@ session_start();
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['nombre']; ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="php/Area_Cliente.php">Mis Datos</a></li>
+            <li><a href="area_cliente/Area_Cliente.php">Mis Datos</a></li>
             <li><a href="php/cerrar_sesion.php">Cerrar Sesion</a></li>
           </ul>
         </li>
@@ -88,7 +88,7 @@ session_start();
         <?php
         }
         ?>
-        <li><a href="php/maincarro.php"><img style="max-width: 35px;" src="css/imagenes/carro.png"/><span class="items_carro"><?php $total=$carrito->articulos_total();echo $total; ?></span></a></li>
+        <li><a href="carro/maincarro.php"><img style="max-width: 35px;" src="css/imagenes/carro.png"/><span class="items_carro"><?php $total=$carrito->articulos_total();echo $total; ?></span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -96,7 +96,31 @@ session_start();
 	</div>
 
 	<div id="main">
+            
+<div id="indexmen">
+<h2 id="be">¿Quienes somos?</h2>
+<p>La tienda de lolo es una empresa que nace en Cataluña con el fin de atender el dilatado mercado textil.</p>
+<p>Con mas de 30 años de experiencia damos el salto a la red para llegar a un mayor numero de personas.</p>
+<p>No dudes en ojear nuestra tienda online y sientete libre de comprar desde la comodidad de tu casa.</p>
+</div>
+<div class="indexcon1">
+<div class="indexcon">
+<div id="uno"><h1>Ultimas novedades</h1></div>
+</div>
+<div class="indexcon">
+<div>
+<div class="dos"><h3 >Lanzada campaña de primavera</h3></div>
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-4by3">
+<iframe class="embed-responsive" id="frame" height="315"  width="560" allowfullscreen="" src="https://www.youtube.com/embed/ai-PF0bBwhA"></iframe>
+</div>
+</div>
+</div>
 
+
+</div>
+            
+            
 	</div>
 
 </div>

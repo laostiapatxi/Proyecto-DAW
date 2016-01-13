@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -38,15 +34,17 @@ and open the template in the editor.
                 $nombre = $_POST["nombre"];
                 $descripcion = $_POST["descripcion"];
                 $precio = $_POST["precio"];
-                $genero = $_POST["genero"];
+
                 $tipo = $_POST["tipo"];
                 $color = $_POST["color"];
                 $talla = $_POST["talla"];
+
                 $descripcion_corta = $_POST["descripcion_corta"];
                 $cod = null;
                 $imagen = $_POST["imagen"];
-                $parametros=[":nombre"=>"$nombre",":descripcion"=>"$descripcion",":precio"=>"$precio",":genero"=>"$genero",":tipo"=>"$tipo",":color"=>"$color",":talla"=>"$talla",":descripcion_corta"=>"$descripcion_corta",":cod"=>"$cod",":imagen"=>"$imagen"];
-                $r=$bd->insertar("insert into articulos values(:nombre,:descripcion,:precio,:genero,:tipo,:color,:talla,:descripcion_corta,:cod,:imagen)",$parametros,$operacion);
+                $cantidad=$_POST["cantidad"];
+                $parametros=[":nombre"=>"$nombre",":descripcion"=>"$descripcion",":precio"=>"$precio",":tipo"=>"$tipo",":color"=>"$color",":talla"=>"$talla",":descripcion_corta"=>"$descripcion_corta",":cod"=>"$cod",":imagen"=>"$imagen",":cantidad"=>"$cantidad"];
+                $r=$bd->insertar("insert into articulos values(:nombre,:descripcion,:precio,:tipo,:color,:talla,:descripcion_corta,:cod,:imagen,:cantidad)",$parametros,$operacion);
               
            }
         
@@ -68,12 +66,27 @@ and open the template in the editor.
             }
              if(isset($_POST['new_worker'])){
                 $operacion="articulo";
-                $param2=$_POST['email'];
-                $param3=$_POST['pass'];
-                $param=[":email"=>"$param2",":pass"=>"$param3"];           
-                $bd->insertar("insert into Trabajadores values(:email,:pass);",$param,$operacion);
+                $param2=$_POST['talla'];
+                $param3=null;
+                $param=[":idtalla"=>"$param3", ":nombre"=>"$param2"];           
+                $bd->insertar("insert into talla values(:idtalla,:nombre);",$param,$operacion);
 
             }
+            
+            
+            if(isset($_POST['new_tipo'])){
+                $operacion="articulo";
+                $param2=$_POST['tipo'];
+                if($param2==""){
+                    echo "<script> alert (\"El nombre no puede estar vacío\"); </script>";
+                    echo "<script language=Javascript> location.href=\"../panel_control/Panel_Control.php\"; </script>";
+                }else{
+                $param3=null;
+                $param=[":idcategoria"=>"$param3", ":nombre"=>"$param2"];           
+                $bd->insertar("insert into categoria values(:idcategoria,:nombre);",$param,$operacion);
+                }
+            }
+            
         ?>
         
 

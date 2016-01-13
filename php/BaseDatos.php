@@ -79,9 +79,11 @@ public function comprobar_disponibilidad($param) {
             $id_pedido=$param[$i][4];
             $nombre=$param[$i][5];
             $total=$param[$i][6];
+            $talla=$param[$i][7];
+            $tipo=$param[$i][8];
             $usuario=$_SESSION['nombre'];
 
-            $query3 = "insert into pedidos values('$cod','$cantidad','$precio','$imagen','$id_pedido','$usuario','$nombre','$total')";
+            $query3 = "insert into pedidos values('$cod','$cantidad','$precio','$imagen','$id_pedido','$usuario','$nombre','$total','$talla','$tipo')";
             $con->query($query3);
 
         }
@@ -127,10 +129,10 @@ public function trabajadores($sentencia=null,$parametros=null,$email=null){
         $autentificado="SI";
         $_SESSION["autentificado"]=$autentificado;
         $_SESSION["nombre"]=$email;
-        echo "<script language=Javascript> location.href=\"Panel_Control.php\"; </script>";
+        echo "<script language=Javascript> location.href=\"../panel_control/Panel_Control.php\"; </script>";
     }else {
         echo "<script> alert (\"Email o contraseña erroneo\"); </script>";
-         echo "<script language=Javascript> location.href=\"Trabajador.php\"; </script>";
+         echo "<script language=Javascript> location.href=\"../panel_control/Trabajador.php\"; </script>";
     }
     $con->close();
     }
@@ -145,7 +147,7 @@ public function selecciona($sentencia=null,$parametros=null,$email=null){
         $autentificado="SI";
         $_SESSION["autentificado"]=$autentificado;
         $_SESSION["nombre"]=$email;
-    echo "<script language=Javascript> location.href=\"Area_Cliente.php\"; </script>";
+    echo "<script language=Javascript> location.href=\"../area_cliente/Area_Cliente.php\"; </script>";
     }else {echo "<script> alert (\"Email o contraseña erroneo\"); </script>";
         echo "<script language=Javascript> location.href=\"../index.php\"; </script>";
     }
@@ -190,14 +192,14 @@ public function insertar($sentencia=null,$param=null,$tipo=null) {
        die();}
          if($tipo=="articulo"){
        echo "<script> alert (\"Articulo creado correctamente\"); </script>"; 
-       echo "<script language=Javascript> location.href=\"Panel_Control.php\"; </script>";
+       echo "<script language=Javascript> location.href=\"../panel_control/Panel_Control.php\"; </script>";
        die(); }}else {
         if($tipo=="registro"){
        echo "<script>alert(\"Ese email ya se encuentra en uso\");</script>";       
        echo "<script language=Javascript> location.href=\"../index.php\"; </script>";}
         if($tipo=="articulo"){
        echo "<script>alert(\"El articulo no se ha podido crear\");</script>";
-       echo "<script language=Javascript> location.href=\"Panel_Control.php\"; </script>";}}
+       echo "<script language=Javascript> location.href=\"../panel_control/Panel_Control.php\"; </script>";}}
     $con->close();}
 
 public function modificar($sentencia,$param) {
@@ -208,8 +210,10 @@ public function modificar($sentencia,$param) {
     $filas=$resultado->rowCount();
     if($filas==1){
     echo "<script>alert(\"Datos modificados correctamente\");</script>";
-    echo "<script language=Javascript> location.href=\"Area_Cliente.php\"; </script>";
-    }else {echo "Ha ocurrido un error.";}
+    echo "<script language=Javascript> location.href=\"../area_cliente/Area_Cliente.php\"; </script>";
+    }else {echo "<script>alert(\"Ha ocurrido un error\");</script>";
+    echo "<script language=Javascript> location.href=\"../area_cliente/Area_Cliente.php\"; </script>";
+    }
     $con->close();
     
 }
